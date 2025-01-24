@@ -1,12 +1,13 @@
-import React from 'react'
 import { RiReactjsLine } from 'react-icons/ri'
-import { TbBrandJavascript } from 'react-icons/tb'
+import { SiJavascript } from "react-icons/si";
+import { SiTypescript } from "react-icons/si";
 import { SiMysql } from 'react-icons/si'
 import { SiSelenium } from 'react-icons/si'
 import { FaNodeJs } from 'react-icons/fa'
-import { SiKubernetes } from 'react-icons/si'
+import { SiGraphql } from "react-icons/si";
 import { SiJenkins } from 'react-icons/si'
 import { motion } from "framer-motion";
+import { SiMongodb } from "react-icons/si";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -46,7 +47,14 @@ const Technologies = () => {
           initial="initial"
           animate="animate"
           className='rounded-2xl border-4 border-neutral-800 p-4'>
-          <TbBrandJavascript className='text-7xl' style={{ color: '#F7DF1E' }} />
+          <SiJavascript className='text-7xl' style={{ color: '#F0DB4F' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-800 p-4'>
+          <SiTypescript className='text-7xl' style={{ color: '#007acc' }} />
         </motion.div>
         <motion.div
           variants={iconVariants(6)}
@@ -61,7 +69,7 @@ const Technologies = () => {
           animate="animate"
           className="rounded-2xl border-4 border-neutral-800 p-4"
         >
-          <SiKubernetes className="text-7xl text-sky-700" />
+          <SiGraphql className="text-7xl text-[#E10098]" />
         </motion.div>
         <motion.div
           variants={iconVariants(2)}
@@ -77,6 +85,14 @@ const Technologies = () => {
           className='rounded-2xl border-4 border-neutral-800 p-4'
         >
           <SiJenkins className='text-7xl text-[#D33833]' />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-800 p-4'
+        >
+          <SiMongodb className='text-7xl text-[#4DB33D]' />
         </motion.div>
         <motion.div
           variants={iconVariants(5)}

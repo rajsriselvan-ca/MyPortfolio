@@ -11,22 +11,22 @@ export const EXPERIENCES = [
     year: "2021 - 2023",
     role: "Software Engineer",
     company: "Szigony Technologies",
-    description: `I developed customer support portals for SAP Ariba clients using SAPUI5, React.js, and PHP. I enhanced performance through code refactoring, worked with REST API microservices, and improved debugging processes, resulting in optimized system efficiency and seamless user experiences.`,
-    technologies: ["TypeScript", "PHP", "React.js", "SAPUI5", "Kubernetes"],
+    description: `Built and maintained scalable full-stack applications using React.js and Node.js, delivering optimal performance and a seamless user experience. Developed responsive interfaces with Tailwind CSS and Ant Design, adhering to modern UI/UX standards. Optimized RESTful APIs with Redis caching, improving data handling and reducing response times by 30%. Ensured code quality by automating workflows with Selenium and implementing unit tests using Jest. Streamlined deployment processes through CI/CD pipelines with Jenkins and Docker. Designed and managed flexible database schemas with MongoDB and created efficient, maintainable APIs using TypeScript and GraphQL.`,
+    technologies: ["TypeScript", "React.js", "Tailwind CSS","GraphQL", "Node.js", "MongoDB"],
   },
   {
     year: "2017 - 2021",
     role: "Software Engineer",
     company: "Kaay Labs",
-    description: `I developed an internal application for Mouser Electronics using React.js and Node.js, boosting user satisfaction by 25%. I optimized development cycles with reusable components, coordinated Agile efforts, and worked with CI/CD pipelines, ensuring timely and cost-effective project delivery.`,
-    technologies: ["JavaScript", "React.js", "Node.js", "HTML5", "CSS3", "Jenkins"],
+    description: `Led the development and delivery of a quotes application for Mouser Electronics using React.js and Node.js, enhancing user satisfaction and system stability. Designed and developed scalable, modular applications with a microservice architecture and ensured efficient data integration using SQL. Explored AWS concepts like EC2, S3, and Lambda for cloud-based deployment solutions. Collaborated with clients to gather requirements and delivered scalable solutions while mentoring junior developers and conducting code reviews to maintain high code quality.`,
+    technologies: ["Microservices", "React.js", "Node.js ", "AWS", "MySQL", "CI/CD"],
   },
   {
     year: "2016 - 2017",
     role: "Junior Software Engineer",
     company: "Kaay Labs",
-    description: `As a junior software engineer, I monitored project progress in JIRA, designed and executed test plans, performed Automation Testing, and collaborated with stakeholders to resolve application issues. Additionally, I presented development phase reports via PowerPoint, ensuring project transparency, accountability, and timely achievement of milestones.`,
-    technologies: ["Java", "Selenium", "GitHub", "MySQL", "JIRA", "Postman"],
+    description: `Debugged and resolved codebase issues to enhance performance and functionality while implementing new features based on technical and business requirements to ensure timely delivery. Managed user stories and bug tracking in JIRA, maintaining efficient project workflows. Actively participated in Scrum calls, team meetings, and knowledge-sharing sessions to stay updated on best practices and contribute to team collaboration.`,
+    technologies: ["Java", "Selenium", "GitHub", "JIRA", "Jenkins", "Postman"],
   },
 ];
 
