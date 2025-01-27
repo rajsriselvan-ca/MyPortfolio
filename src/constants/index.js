@@ -1,3 +1,4 @@
+import project1a from "../assets/projects/project-1a.png";
 import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
 import project3 from "../assets/projects/project-3.png";
@@ -31,6 +32,14 @@ export const EXPERIENCES = [
 ];
 
 export const PROJECTS = [
+  {
+    title: "WordSmith",
+    image: project1a,
+    url: "https://wordsmithtracker.netlify.app/",
+    description:
+      `WordSmith is a vocabulary tracker app is designed for students, professionals, and language learners to expand their vocabulary effectively. Users can set daily word goals, add new words with meanings and sample sentences, and track progress through a visual graphs. The app also provides a personalized library to review and manage learned words, promoting consistent and structured learning.`,
+    technologies: ["TypeScript", "GraphQL", "Tailwind CSS", "MongoDB", "React & Node.js"],
+  },
   {
     title: "Dev Notes",
     image: project1,
