@@ -3,9 +3,9 @@ import project1 from "../assets/projects/project-1.png";
 import project2 from "../assets/projects/project-2.png";
 import project3 from "../assets/projects/project-3.png";
 
-export const HERO_CONTENT = `As an experienced Software Engineer, I possess a strong background in both frontend and backend web development, with expertise in JavaScript, TypeScript, React.js, Node.js, and SQL. My skill set extends to Python, Java and PHP enabling me to tackle diverse technical challenges. I am proficient in designing and implementing RESTful APIs and GraphQL endpoints, ensuring seamless communication between systems.
+export const HERO_CONTENT = `As an experienced Software Engineer, I possess a strong background in both frontend and backend web development, with expertise in JavaScript, TypeScript, React.js, Node.js, and SQL. My skill set extends to Python, Java, and PHP, enabling me to tackle diverse technical challenges. I have a strong background in modern UI frameworks like Tailwind CSS and Ant Design, which allows me to create visually appealing and responsive user interfaces.
 
-With a solid understanding of CI/CD processes, I am skilled in automation testing and proficient in using Jest for unit testing, ensuring high-quality code delivery. My experience includes bug fixing, debugging, and optimizing performance to maintain robust and scalable applications.
+I am proficient in designing and implementing RESTful APIs and GraphQL endpoints, ensuring seamless communication between systems. With a solid understanding of CI/CD processes, I am skilled in automation testing and proficient in using Jest for unit testing, ensuring high-quality code delivery. My experience includes bug fixing, debugging, and optimizing performance to maintain robust and scalable applications.
 
 Additionally, I have a proven track record of collaborating with clients to gather technical requirements and working within Agile methodologies to contribute effectively across the entire software development life cycle. My ability to drive innovative solutions has consistently enhanced business performance and user experiences.`;
 
