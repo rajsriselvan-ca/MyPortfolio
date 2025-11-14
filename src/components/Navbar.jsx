@@ -13,19 +13,30 @@ const Navbar = () => {
     window.open('https://github.com/rajsriselvan-ca?tab=repositories', '_blank'); 
   };
 
-  return <nav className='mb-20 flex items-center justify-between py-6'>
-    <div className='flex flex-shrink-0 items-center'>
-    <img className='mx-2 w-14' src={logo} alt="logo"/>
-    </div>
-    <div className='m-8 flex items-center justify-center gap-4 text-4xl'>
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return <nav className='fixed top-0 left-0 right-0 z-[100] flex w-full items-center justify-between bg-slate-800 px-8 py-3 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.4),0_4px_6px_-2px_rgba(0,0,0,0.3)]'>
+    <div className='container mx-auto flex items-center justify-between'>
+      <div className='flex flex-shrink-0 items-center'>
+        <img 
+          onClick={handleLogoClick}
+          className='mx-2 w-14 cursor-pointer transition-transform transform hover:scale-110' 
+          src={logo} 
+          alt="logo"
+        />
+      </div>
+      <div className='flex items-center justify-center gap-4 text-4xl'>
         <FaLinkedin
           onClick={handleLinkedInClick}
-          className='cursor-pointer transition-transform transform hover:scale-110'
+          className='cursor-pointer text-white transition-transform transform hover:scale-110 hover:text-cyan-400'
         />
         <FaGithub
           onClick={handleGithubClick}
-          className='cursor-pointer transition-transform transform hover:scale-110'
+          className='cursor-pointer text-white transition-transform transform hover:scale-110 hover:text-cyan-400'
         />
+      </div>
     </div>
   </nav>
 }
