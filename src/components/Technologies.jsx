@@ -3,11 +3,18 @@ import { SiJavascript } from "react-icons/si";
 import { SiTypescript } from "react-icons/si";
 import { SiMysql } from 'react-icons/si'
 import { SiSelenium } from 'react-icons/si'
-import { FaNodeJs } from 'react-icons/fa'
+import { FaNodeJs, FaAws } from 'react-icons/fa'
 import { SiGraphql } from "react-icons/si";
 import { SiJenkins } from 'react-icons/si'
 import { motion } from "framer-motion";
 import { SiMongodb } from "react-icons/si";
+import { SiCypress } from "react-icons/si";
+import { SiCircleci } from "react-icons/si";
+import { SiDocker } from "react-icons/si";
+import { SiPython } from "react-icons/si";
+import { SiPytorch } from "react-icons/si";
+import { SiOpenai } from "react-icons/si";
+import { SiFigma } from "react-icons/si";
 
 const iconVariants = (duration) => ({
   initial: { y: -10 },
@@ -57,11 +64,33 @@ const Technologies = () => {
           <SiTypescript className='text-7xl' style={{ color: '#007acc' }} />
         </motion.div>
         <motion.div
+          variants={iconVariants(4.5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4 flex items-center justify-center'>
+          <img 
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" 
+            alt="Python" 
+            className='w-16 h-16 object-contain'
+          />
+        </motion.div>
+        <motion.div
           variants={iconVariants(6)}
           initial="initial"
           animate="animate"
           className='rounded-2xl border-4 border-neutral-200 p-4'>
           <FaNodeJs className='text-7xl text-green-500' />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4.5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4 flex items-center justify-center'>
+          <img 
+            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" 
+            alt="Figma" 
+            className='w-16 h-16 object-contain'
+          />
         </motion.div>
         <motion.div
           variants={iconVariants(4)}
@@ -100,6 +129,48 @@ const Technologies = () => {
           animate="animate"
           className='rounded-2xl border-4 border-neutral-200 p-4'>
           <SiMysql className='text-7xl text-blue-300' />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(3.5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <SiCypress className='text-7xl' style={{ color: '#17202C' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4.5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <SiCircleci className='text-7xl' style={{ color: '#343434' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(3)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <FaAws className='text-7xl' style={{ color: '#FF9900' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <SiDocker className='text-7xl' style={{ color: '#2496ED' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(3.5)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <SiPytorch className='text-7xl' style={{ color: '#EE4C2C' }} />
+        </motion.div>
+        <motion.div
+          variants={iconVariants(4)}
+          initial="initial"
+          animate="animate"
+          className='rounded-2xl border-4 border-neutral-200 p-4'>
+          <SiOpenai className='text-7xl' style={{ color: '#000000' }} />
         </motion.div>
       </motion.div>
     </div>
