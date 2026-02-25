@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from "../assets/RajLogo.png";
-import {FaLinkedin} from "react-icons/fa";
-import {FaGithub} from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaGraduationCap } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -15,6 +16,13 @@ const Navbar = () => {
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleDegreeClick = () => {
+    const section = document.getElementById('education');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return <nav className='fixed top-0 left-0 right-0 z-[100] flex w-full items-center justify-between bg-slate-800 px-8 py-3 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.4),0_4px_6px_-2px_rgba(0,0,0,0.3)]'>
@@ -35,6 +43,11 @@ const Navbar = () => {
         <FaGithub
           onClick={handleGithubClick}
           className='cursor-pointer text-white transition-transform transform hover:scale-110 hover:text-cyan-400'
+        />
+        <FaGraduationCap
+          onClick={handleDegreeClick}
+          className='cursor-pointer text-white transition-transform transform hover:scale-110 hover:text-cyan-400'
+          title="Degree"
         />
       </div>
     </div>

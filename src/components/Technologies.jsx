@@ -135,7 +135,7 @@ const Technologies = () => {
           initial="initial"
           animate="animate"
           className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiCypress className='text-7xl' style={{ color: '#17202C' }} />
+          <SiCypress className='text-7xl text-emerald-500' />
         </motion.div>
         <motion.div
           variants={iconVariants(4.5)}
