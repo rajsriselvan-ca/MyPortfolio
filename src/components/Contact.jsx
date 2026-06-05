@@ -35,11 +35,13 @@ const Contact = () => {
         },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `New portfolio message from ${form.name}`,
-          from_name: "Portfolio Contact Form",
+          subject: `Portfolio enquiry from ${form.name}`,
+          from_name: form.name,
+          replyto: form.email,
           name: form.name,
           email: form.email,
           message: form.message,
+          botcheck: false,
         }),
       });
       const data = await res.json();
