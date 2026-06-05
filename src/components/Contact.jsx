@@ -1,7 +1,50 @@
 import { useState } from "react";
 import { CONTACT } from "../constants";
-import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaCopy } from "react-icons/fa";
+
+/* Small copy-to-clipboard button with a tick confirmation */
+const CopyBtn = ({ text }) => {
+  const [copied, setCopied] = useState(false);
+  const copy = async (e) => {
+    e.preventDefault();
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={copy}
+      title="Copy to clipboard"
+      className="ml-1.5 inline-flex items-center justify-center rounded-full p-1 text-white/50 transition-all hover:bg-white/15 hover:text-white"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {copied ? (
+          <motion.span
+            key="tick"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-emerald-400"
+          >
+            <FaCheckCircle size={12} />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="copy"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <FaCopy size={12} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </button>
+  );
+};
 
 const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
@@ -94,35 +137,37 @@ const Contact = () => {
 
             <h3 className="font-display text-2xl font-bold">Let&apos;s create something extraordinary</h3>
             <p className="mt-2 text-sm text-white/80">
-              Open to full-time, contract and consulting opportunities.
+              Open to full-time, founding engineer and consulting opportunities.
             </p>
 
             <ul className="mt-8 space-y-5 text-sm">
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+              <li className="flex items-center gap-3">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                   <FaMapMarkerAlt />
                 </span>
                 <span>{CONTACT.address}</span>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white/15">
+              <li className="flex items-center gap-3">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                   <FaPhone />
                 </span>
                 <div className="flex flex-col gap-0.5">
                   {CONTACT.phones.map((p) => (
-                    <a key={p} href={`tel:${p.replace(/\s/g, "")}`} className="hover:underline">
-                      {p}
-                    </a>
+                    <span key={p} className="inline-flex items-center gap-0.5">
+                      <a href={`tel:${p.replace(/\s/g, "")}`} className="hover:underline">{p}</a>
+                      <CopyBtn text={p} />
+                    </span>
                   ))}
                 </div>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/15">
+              <li className="flex items-center gap-3">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white/15">
                   <FaEnvelope />
                 </span>
-                <a href={`mailto:${CONTACT.email}`} className="break-all hover:underline">
-                  {CONTACT.email}
-                </a>
+                <span className="inline-flex items-center gap-0.5">
+                  <a href={`mailto:${CONTACT.email}`} className="break-all hover:underline">{CONTACT.email}</a>
+                  <CopyBtn text={CONTACT.email} />
+                </span>
               </li>
             </ul>
           </div>
