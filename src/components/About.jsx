@@ -2,6 +2,33 @@ import aboutImg from "../assets/aboutMe.jpg";
 import { ABOUT_TEXT } from "../constants";
 import { motion } from "framer-motion";
 
+/* Splits a text node on a keyword and wraps it in an animated highlight */
+const withHighlight = (text, keyword) => {
+  const parts = text.split(keyword);
+  if (parts.length === 1) return text;
+  return (
+    <>
+      {parts[0]}
+      <motion.span
+        initial={{ backgroundPosition: "-200% 0" }}
+        animate={{ backgroundPosition: "200% 0" }}
+        transition={{ duration: 3.5, ease: "linear", repeat: Infinity }}
+        className="inline-block cursor-default rounded-sm px-0.5 font-semibold"
+        style={{
+          background: "linear-gradient(90deg, #818cf8, #e879f9, #38bdf8, #818cf8)",
+          backgroundSize: "200% auto",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
+        }}
+      >
+        {keyword}
+      </motion.span>
+      {parts[1]}
+    </>
+  );
+};
+
 const About = () => {
   const paragraphs = ABOUT_TEXT.split('\n\n');
 
@@ -20,7 +47,7 @@ const About = () => {
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-5">
+      <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-5">
         <motion.div
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -60 }}
@@ -45,7 +72,7 @@ const About = () => {
         >
           <div className="space-y-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
             {paragraphs.map((line, i) => (
-              <p key={i}>{line}</p>
+              <p key={i}>{withHighlight(line, "never-give-up")}</p>
             ))}
           </div>
 

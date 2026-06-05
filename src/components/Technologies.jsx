@@ -18,6 +18,8 @@ const TECHS = [
   { Icon: SiMongodb,       label: 'MongoDB',     color: '#4DB33D',  duration: 5   },
   { Icon: SiMysql,         label: 'MySQL',       color: '#60a5fa',  duration: 5   },
   { Icon: FaAws,           label: 'AWS',         color: '#FF9900',  duration: 3   },
+  { Img: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg',
+                           label: 'Google Cloud',                    duration: 4   },
   { Icon: SiDocker,        label: 'Docker',      color: '#2496ED',  duration: 4   },
   { Icon: SiApachekafka,   label: 'Kafka',       color: '#e5e7eb',  duration: 3.5 },
   { Img: 'https://cdn.simpleicons.org/langchain/22C55E',
