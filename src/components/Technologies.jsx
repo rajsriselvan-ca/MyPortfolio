@@ -1,180 +1,97 @@
-import { RiReactjsLine } from 'react-icons/ri'
-import { SiJavascript } from "react-icons/si";
-import { SiTypescript } from "react-icons/si";
-import { SiMysql } from 'react-icons/si'
-import { SiSelenium } from 'react-icons/si'
-import { FaNodeJs, FaAws } from 'react-icons/fa'
-import { SiGraphql } from "react-icons/si";
-import { SiJenkins } from 'react-icons/si'
+import { RiReactjsLine } from 'react-icons/ri';
+import {
+  SiJavascript, SiTypescript, SiMysql, SiSelenium, SiGraphql,
+  SiJenkins, SiMongodb, SiCypress, SiCircleci, SiDocker,
+  SiPytorch, SiOpenai, SiApachekafka,
+} from "react-icons/si";
+import { FaNodeJs, FaAws } from 'react-icons/fa';
 import { motion } from "framer-motion";
-import { SiMongodb } from "react-icons/si";
-import { SiCypress } from "react-icons/si";
-import { SiCircleci } from "react-icons/si";
-import { SiDocker } from "react-icons/si";
-import { SiPython } from "react-icons/si";
-import { SiPytorch } from "react-icons/si";
-import { SiOpenai } from "react-icons/si";
-import { SiFigma } from "react-icons/si";
+
+const TECHS = [
+  { Icon: RiReactjsLine,   label: 'React',       color: '#06b6d4',  duration: 2.5 },
+  { Icon: SiJavascript,    label: 'JavaScript',  color: '#F0DB4F',  duration: 3   },
+  { Icon: SiTypescript,    label: 'TypeScript',  color: '#3178c6',  duration: 4   },
+  { Img: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg',
+                           label: 'Python',                         duration: 4.5 },
+  { Icon: FaNodeJs,        label: 'Node.js',     color: '#22c55e',  duration: 6   },
+  { Icon: SiGraphql,       label: 'GraphQL',     color: '#E10098',  duration: 4   },
+  { Icon: SiMongodb,       label: 'MongoDB',     color: '#4DB33D',  duration: 5   },
+  { Icon: SiMysql,         label: 'MySQL',       color: '#60a5fa',  duration: 5   },
+  { Icon: FaAws,           label: 'AWS',         color: '#FF9900',  duration: 3   },
+  { Icon: SiDocker,        label: 'Docker',      color: '#2496ED',  duration: 4   },
+  { Icon: SiApachekafka,   label: 'Kafka',       color: '#e5e7eb',  duration: 3.5 },
+  { Img: 'https://cdn.simpleicons.org/langchain/22C55E',
+                           label: 'LangChain',                      duration: 5   },
+  { Img: 'https://cdn.simpleicons.org/anthropic/D97757',
+                           label: 'Claude AI',                      duration: 4   },
+  { Img: 'https://cdn.simpleicons.org/n8n/EA4B71',
+                           label: 'n8n',                            duration: 3   },
+  { Icon: SiPytorch,       label: 'PyTorch',     color: '#EE4C2C',  duration: 3.5 },
+  { Icon: SiOpenai,        label: 'OpenAI',      color: '#e5e7eb',  duration: 4   },
+  { Icon: SiSelenium,      label: 'Selenium',    color: '#43B02A',  duration: 2   },
+  { Icon: SiJenkins,       label: 'Jenkins',     color: '#D33833',  duration: 5   },
+  { Icon: SiCypress,       label: 'Cypress',     color: '#10b981',  duration: 3.5 },
+  { Icon: SiCircleci,      label: 'CircleCI',    color: '#cbd5e1',  duration: 4.5 },
+  { Img: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg',
+                           label: 'Figma',                          duration: 4.5 },
+];
 
 const iconVariants = (duration) => ({
-  initial: { y: -10 },
+  initial: { y: -8 },
   animate: {
-    y: [10, -10],
-    transition: {
-      duration: duration,
-      ease: "linear",
-      repeat: Infinity,
-      repeatType: "reverse"
-    }
-  }
-})
+    y: [8, -8],
+    transition: { duration, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+  },
+});
 
 const Technologies = () => {
   return (
-    <div className='border-b border-neutral-200 pb-24'>
-      <motion.h2
-        whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
-        transition={{ duration: 1.5 }}
-        className='my-20 text-center text-4xl'>Technologies</motion.h2>
+    <section id="tech" className="relative z-10 py-20 text-white">
       <motion.div
-        whileInView={{ opacity: 1, x: 0 }}
-        initial={{ opacity: 0, x: -100 }}
-        transition={{ duration: 1.5 }}
-        className='flex flex-wrap items-center justify-center gap-4'>
-        <motion.div
-          variants={iconVariants(2.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <RiReactjsLine className='text-7xl text-cyan-400' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(3)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiJavascript className='text-7xl' style={{ color: '#F0DB4F' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiTypescript className='text-7xl' style={{ color: '#007acc' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4 flex items-center justify-center'>
-          <img 
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" 
-            alt="Python" 
-            className='w-16 h-16 object-contain'
-          />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(6)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <FaNodeJs className='text-7xl text-green-500' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4 flex items-center justify-center'>
-          <img 
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" 
-            alt="Figma" 
-            className='w-16 h-16 object-contain'
-          />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-200 p-4"
-        >
-          <SiGraphql className="text-7xl text-[#E10098]" />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiSelenium className='text-7xl' style={{ color: '#43B02A' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'
-        >
-          <SiJenkins className='text-7xl text-[#D33833]' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'
-        >
-          <SiMongodb className='text-7xl text-[#4DB33D]' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiMysql className='text-7xl text-blue-300' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(3.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiCypress className='text-7xl text-emerald-500' />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiCircleci className='text-7xl' style={{ color: '#343434' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(3)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <FaAws className='text-7xl' style={{ color: '#FF9900' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiDocker className='text-7xl' style={{ color: '#2496ED' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(3.5)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiPytorch className='text-7xl' style={{ color: '#EE4C2C' }} />
-        </motion.div>
-        <motion.div
-          variants={iconVariants(4)}
-          initial="initial"
-          animate="animate"
-          className='rounded-2xl border-4 border-neutral-200 p-4'>
-          <SiOpenai className='text-7xl' style={{ color: '#000000' }} />
-        </motion.div>
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 24 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="mb-12 text-center"
+      >
+        <p className="font-mono text-xs uppercase tracking-[0.4em] text-indigo-300">/ 02</p>
+        <h2 className="mt-2 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          My <span className="text-gradient">Tech Stack</span>
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-zinc-400">
+          Tools I reach for daily, frontend, backend, infrastructure and AI.
+        </p>
       </motion.div>
-    </div>
-  )
-}
 
-export default Technologies
+      <motion.div
+        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="flex flex-wrap items-center justify-center gap-4"
+      >
+        {TECHS.map((t) => (
+          <motion.div
+            key={t.label}
+            variants={iconVariants(t.duration)}
+            initial="initial"
+            animate="animate"
+            title={t.label}
+            className="group relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-indigo-400/40 hover:bg-white/10 hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]"
+          >
+            {t.Icon ? (
+              <t.Icon className="text-5xl" style={{ color: t.color }} />
+            ) : (
+              <img src={t.Img} alt={t.label} className="h-12 w-12 object-contain" />
+            )}
+            <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+              {t.label}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  );
+};
+
+export default Technologies;
