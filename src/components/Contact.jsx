@@ -33,16 +33,15 @@ const Contact = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Portfolio enquiry from ${form.name}`,
-          from_name: form.name,
-          replyto: form.email,
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          botcheck: false,
-        }),
+  body: JSON.stringify({
+  access_key: WEB3FORMS_KEY,
+  subject: `Portfolio enquiry from ${form.name}`,
+  from_name: form.name,
+  replyto: form.email,
+  name: form.name,
+  email: form.email,
+  message: form.message,
+}),
       });
       const data = await res.json();
       if (data.success) {
