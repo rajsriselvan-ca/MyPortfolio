@@ -20,6 +20,781 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Interactive neural constellation around the hero portrait */
+.neural-constellation {
+  perspective: 900px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neural-ambient {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(103, 232, 249, 0.16), transparent 42%),
+    radial-gradient(circle at 35% 65%, rgba(167, 139, 250, 0.13), transparent 55%);
+  filter: blur(18px);
+  opacity: 0.7;
+  transition: opacity 500ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neural-constellation[data-hovered="true"] .neural-ambient,
+.neural-constellation[data-energized="true"] .neural-ambient {
+  opacity: 1;
+  transform: scale(1.16);
+}
+
+.neural-constellation[data-energy-level="2"] .neural-ambient {
+  filter: blur(20px) brightness(1.25);
+  transform: scale(1.24);
+}
+
+.neural-constellation[data-energy-level="3"] .neural-ambient,
+.neural-constellation[data-phase="shattering"] .neural-ambient {
+  filter: blur(22px) brightness(1.7);
+  transform: scale(1.38);
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(103, 232, 249, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 232, 249, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(circle, #000 12%, transparent 68%);
+  -webkit-mask-image: radial-gradient(circle, #000 12%, transparent 68%);
+  opacity: 0.35;
+  animation: neuralGridDrift 12s linear infinite;
+}
+
+.neural-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(165, 243, 252, 0.28);
+  border-radius: 999px;
+  box-shadow: inset 0 0 12px rgba(103, 232, 249, 0.04);
+  transition: border-color 400ms ease, filter 400ms ease;
+}
+
+.neural-orbit-one {
+  width: 310px;
+  height: 132px;
+  margin: -66px 0 0 -155px;
+  animation: neuralOrbitOne 15s linear infinite;
+}
+
+.neural-orbit-two {
+  width: 286px;
+  height: 178px;
+  margin: -89px 0 0 -143px;
+  border-color: rgba(196, 181, 253, 0.23);
+  animation: neuralOrbitTwo 19s linear infinite reverse;
+}
+
+.neural-orbit-three {
+  width: 218px;
+  height: 316px;
+  margin: -158px 0 0 -109px;
+  border-color: rgba(255, 255, 255, 0.16);
+  animation: neuralOrbitThree 24s linear infinite;
+}
+
+.neural-constellation[data-hovered="true"] .neural-orbit {
+  border-color: rgba(165, 243, 252, 0.55);
+  filter: drop-shadow(0 0 5px rgba(103, 232, 249, 0.35));
+}
+
+.neural-constellation[data-energy-level="1"] .neural-orbit {
+  border-color: rgba(165, 243, 252, 0.52);
+  filter: drop-shadow(0 0 5px rgba(103, 232, 249, 0.32));
+  animation-duration: 8s;
+}
+
+.neural-constellation[data-energy-level="2"] .neural-orbit {
+  border-color: rgba(165, 243, 252, 0.72);
+  filter: drop-shadow(0 0 7px rgba(103, 232, 249, 0.6));
+  animation-duration: 4.2s;
+}
+
+.neural-constellation[data-energy-level="3"] .neural-orbit {
+  border-color: rgba(224, 231, 255, 0.95);
+  filter: drop-shadow(0 0 8px #67e8f9) drop-shadow(0 0 16px rgba(167, 139, 250, 0.8));
+  animation-duration: 1.65s;
+}
+
+.neural-constellation[data-phase="shattering"] .neural-orbit {
+  border-color: rgba(255, 255, 255, 0.98);
+  filter: drop-shadow(0 0 11px #fff) drop-shadow(0 0 25px #67e8f9);
+  animation-duration: 0.42s;
+  opacity: 0.95;
+}
+
+.neural-constellation:is([data-phase="crystal"], [data-phase="reforming"], [data-phase="fusing"]) :is(
+  .neural-ambient,
+  .neural-grid,
+  .neural-orbit,
+  .neural-connections,
+  .neural-data-node,
+  .neural-cursor-lens,
+  .neural-reticle
+) {
+  display: none;
+}
+
+.neural-satellite {
+  position: absolute;
+  left: calc(100% - 3px);
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: #cffafe;
+  box-shadow: 0 0 5px #67e8f9, 0 0 14px rgba(103, 232, 249, 0.85);
+}
+
+.neural-connections path {
+  fill: none;
+  stroke: rgba(165, 243, 252, 0.2);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 8;
+  animation: neuralDash 9s linear infinite;
+  transition: stroke 400ms ease;
+}
+
+.neural-constellation[data-energized="true"] .neural-connections path {
+  stroke: rgba(196, 181, 253, 0.52);
+  animation-duration: 2.5s;
+}
+
+.neural-constellation[data-energy-level="3"] .neural-connections path,
+.neural-constellation[data-phase="shattering"] .neural-connections path {
+  stroke: rgba(224, 231, 255, 0.85);
+  filter: drop-shadow(0 0 3px #67e8f9);
+  animation-duration: 0.75s;
+}
+
+.neural-data-node {
+  border-radius: 999px;
+  background: #a5f3fc;
+  box-shadow: 0 0 8px rgba(103, 232, 249, 0.9);
+  animation: neuralNodePulse 3.6s ease-in-out infinite;
+}
+
+.neural-constellation[data-energized="true"] .neural-data-node {
+  background: #ddd6fe;
+  box-shadow: 0 0 11px #a78bfa, 0 0 22px rgba(167, 139, 250, 0.7);
+  animation-duration: 1.5s;
+}
+
+.neural-constellation[data-energy-level="2"] .neural-data-node {
+  animation-duration: 0.9s;
+}
+
+.neural-constellation[data-energy-level="3"] .neural-data-node,
+.neural-constellation[data-phase="shattering"] .neural-data-node {
+  background: #fff;
+  box-shadow: 0 0 9px #fff, 0 0 22px #67e8f9, 0 0 34px rgba(167, 139, 250, 0.9);
+  animation-duration: 0.38s;
+}
+
+.neural-cursor-lens {
+  background: radial-gradient(circle, rgba(207, 250, 254, 0.22), rgba(103, 232, 249, 0.05) 45%, transparent 72%);
+  border: 1px solid rgba(165, 243, 252, 0.18);
+  filter: blur(1px);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  box-shadow: 0 0 25px rgba(103, 232, 249, 0.08);
+}
+
+.neural-constellation[data-hovered="true"] .neural-cursor-lens {
+  opacity: 1;
+}
+
+.neural-avatar-shell {
+  box-shadow: 0 16px 55px rgba(0, 0, 0, 0.65);
+}
+
+.solid-gray-atom {
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.98) 0 3%, rgba(255, 255, 255, 0.42) 8%, transparent 20%),
+    radial-gradient(circle at 68% 76%, rgba(255, 255, 255, 0.28), transparent 24%),
+    linear-gradient(125deg, #3f3f46 0%, #a1a1aa 16%, #f4f4f5 31%, #71717a 45%, #fafafa 57%, #a1a1aa 70%, #3f3f46 88%, #18181b 100%);
+  box-shadow:
+    inset 18px 16px 30px rgba(255, 255, 255, 0.22),
+    inset -24px -22px 36px rgba(0, 0, 0, 0.48),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.58),
+    0 18px 45px rgba(0, 0, 0, 0.55),
+    0 0 25px rgba(212, 212, 216, 0.16);
+}
+
+.solid-gray-atom::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  background: linear-gradient(108deg, transparent 34%, rgba(255, 255, 255, 0.08) 43%, rgba(255, 255, 255, 0.78) 49%, rgba(255, 255, 255, 0.12) 55%, transparent 65%);
+  transform: translateX(-42%) rotate(8deg);
+  mix-blend-mode: screen;
+  animation: metalSheen 7s ease-in-out infinite;
+}
+
+.solid-gray-atom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.035) 4px, rgba(0, 0, 0, 0.025) 5px);
+  mix-blend-mode: overlay;
+  opacity: 0.65;
+}
+
+.neural-avatar-border {
+  background: conic-gradient(from 0deg, transparent 0 10%, #67e8f9 18%, transparent 28% 48%, #a78bfa 58%, transparent 68% 84%, #fff 92%, transparent 100%);
+  animation: neuralBorderSpin 10s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.3));
+  transition: filter 400ms ease;
+}
+
+.neural-avatar-border::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: inherit;
+}
+
+.neural-constellation[data-energized="true"] .neural-avatar-border {
+  animation-duration: 2.8s;
+  filter: drop-shadow(0 0 12px rgba(103, 232, 249, 0.65)) drop-shadow(0 0 20px rgba(167, 139, 250, 0.35));
+}
+
+.neural-constellation[data-energy-level="2"] .neural-avatar-border {
+  animation-duration: 1.6s;
+  filter: drop-shadow(0 0 14px rgba(103, 232, 249, 0.85)) drop-shadow(0 0 25px rgba(167, 139, 250, 0.55));
+}
+
+.neural-constellation[data-energy-level="3"] .neural-avatar-border,
+.neural-constellation[data-phase="shattering"] .neural-avatar-border {
+  animation-duration: 0.62s;
+  filter: drop-shadow(0 0 18px #67e8f9) drop-shadow(0 0 34px rgba(167, 139, 250, 0.9));
+}
+
+.neural-scan {
+  background: linear-gradient(to bottom, transparent 0 43%, rgba(165, 243, 252, 0.2) 50%, transparent 57% 100%);
+  background-size: 100% 220%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  animation: neuralScan 3.2s linear infinite;
+}
+
+.neural-constellation[data-hovered="true"] .neural-scan,
+.neural-constellation[data-energized="true"] .neural-scan {
+  opacity: 1;
+}
+
+.neural-reticle {
+  border-radius: 999px;
+  background:
+    linear-gradient(#a5f3fc, #a5f3fc) 50% 0 / 1px 8px no-repeat,
+    linear-gradient(#a5f3fc, #a5f3fc) 50% 100% / 1px 8px no-repeat,
+    linear-gradient(90deg, #a5f3fc, #a5f3fc) 0 50% / 8px 1px no-repeat,
+    linear-gradient(90deg, #a5f3fc, #a5f3fc) 100% 50% / 8px 1px no-repeat;
+  opacity: 0.45;
+  animation: neuralReticleBreathe 4s ease-in-out infinite;
+}
+
+.neural-constellation[data-energy-level="2"] .neural-reticle {
+  opacity: 0.75;
+  animation-duration: 1.8s;
+}
+
+.neural-constellation[data-energy-level="3"] .neural-reticle,
+.neural-constellation[data-phase="shattering"] .neural-reticle {
+  opacity: 1;
+  filter: drop-shadow(0 0 7px #67e8f9);
+  animation-duration: 0.65s;
+}
+
+.crystal-burst-rays {
+  background: repeating-conic-gradient(
+    from 4deg,
+    transparent 0deg 8deg,
+    rgba(165, 243, 252, 0.95) 9deg,
+    transparent 10deg 21deg,
+    rgba(196, 181, 253, 0.72) 22deg,
+    transparent 23deg 34deg
+  );
+  mask-image: radial-gradient(circle, transparent 0 18%, #000 27%, transparent 69%);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 18%, #000 27%, transparent 69%);
+  filter: blur(0.4px) drop-shadow(0 0 9px #67e8f9);
+}
+
+.fracture-flash,
+.fusion-flash {
+  background:
+    radial-gradient(circle, #fff 0 12%, #cffafe 23%, rgba(103, 232, 249, 0.92) 38%, rgba(167, 139, 250, 0.62) 57%, transparent 74%);
+  box-shadow:
+    0 0 18px 8px #fff,
+    0 0 50px 24px rgba(103, 232, 249, 0.94),
+    0 0 95px 42px rgba(167, 139, 250, 0.68);
+}
+
+.identity-reveal {
+  filter: saturate(0.94) contrast(1.04);
+  box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.26);
+}
+
+.identity-flash {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.98) 0 7%, rgba(207, 250, 254, 0.82) 21%, rgba(103, 232, 249, 0.38) 43%, transparent 68%);
+  mix-blend-mode: screen;
+  box-shadow:
+    inset 0 0 28px rgba(255, 255, 255, 0.72),
+    0 0 22px 8px rgba(255, 255, 255, 0.75),
+    0 0 58px 22px rgba(103, 232, 249, 0.52);
+}
+
+.neural-constellation[data-phase="revealing"] .neural-avatar-shell {
+  pointer-events: none;
+}
+
+.neural-constellation[data-phase="revealing"] .neural-orbit {
+  animation-play-state: paused;
+  opacity: 0.42;
+}
+
+.neural-constellation[data-phase="revealing"] .neural-cursor-lens {
+  opacity: 0;
+}
+
+.crystal-button::before,
+.crystal-button::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(165, 243, 252, 0.48);
+  animation: crystalHalo 2.2s ease-out infinite;
+}
+
+.crystal-button::after {
+  inset: 2px;
+  border-color: rgba(196, 181, 253, 0.24);
+  animation-delay: 0.72s;
+}
+
+.crystal-core {
+  clip-path: polygon(50% 0, 94% 28%, 77% 88%, 50% 100%, 23% 88%, 6% 28%);
+  background:
+    linear-gradient(128deg, rgba(255, 255, 255, 0.96) 2%, rgba(165, 243, 252, 0.95) 22%, rgba(34, 211, 238, 0.78) 52%, rgba(124, 58, 237, 0.86) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    inset -5px -8px 12px rgba(91, 33, 182, 0.55),
+    inset 5px 3px 9px rgba(255, 255, 255, 0.72),
+    0 0 12px #cffafe,
+    0 0 30px rgba(103, 232, 249, 0.9),
+    0 0 62px rgba(167, 139, 250, 0.7);
+  animation: crystalFloat 2.8s ease-in-out infinite;
+  transition: filter 250ms ease, transform 250ms ease;
+}
+
+.crystal-button:hover .crystal-core,
+.crystal-button:focus-visible .crystal-core {
+  filter: brightness(1.5);
+  transform: scale(1.12);
+}
+
+.crystal-glint {
+  box-shadow: 0 0 5px 2px #fff;
+  animation: crystalGlint 1.8s ease-in-out infinite;
+}
+
+.crystal-fractures {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.96);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px #67e8f9) drop-shadow(0 0 7px rgba(255, 255, 255, 0.9));
+}
+
+.crystal-fractures path {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: fractureDraw 520ms ease-out 120ms forwards;
+}
+
+.crystal-shard {
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow:
+    inset 3px 2px 5px rgba(255, 255, 255, 0.88),
+    inset -4px -4px 8px rgba(24, 24, 27, 0.62),
+    0 0 6px rgba(255, 255, 255, 0.68),
+    0 0 13px rgba(103, 232, 249, 0.42);
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.38));
+  backface-visibility: hidden;
+}
+
+.fusion-nucleus {
+  background: radial-gradient(circle, #fff 0 18%, #a5f3fc 34%, #8b5cf6 62%, transparent 74%);
+  box-shadow: 0 0 14px 7px #fff, 0 0 42px 22px rgba(103, 232, 249, 0.78), 0 0 78px 34px rgba(139, 92, 246, 0.5);
+}
+
+.overdrive-vortex {
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 7deg,
+    rgba(165, 243, 252, 0.82) 8deg,
+    transparent 9deg 16deg,
+    rgba(196, 181, 253, 0.62) 17deg,
+    transparent 18deg 27deg
+  );
+  mask-image: radial-gradient(circle, transparent 0 48%, #000 57%, transparent 73%);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 48%, #000 57%, transparent 73%);
+  filter: blur(0.6px) drop-shadow(0 0 10px #67e8f9) drop-shadow(0 0 24px rgba(167, 139, 250, 0.72));
+}
+
+.neural-status {
+  transition: color 350ms ease, border-color 350ms ease, box-shadow 350ms ease;
+}
+
+.neural-status-dot {
+  background: #52525b;
+  transition: background 300ms ease, box-shadow 300ms ease;
+}
+
+.neural-status[data-energy-level="1"] {
+  color: #a5f3fc;
+  border-color: rgba(103, 232, 249, 0.22);
+}
+
+.neural-status[data-energy-level="1"] .neural-status-dot,
+.neural-status[data-energy-level="2"] .neural-status-dot,
+.neural-status[data-energy-level="3"] .neural-status-dot {
+  background: #67e8f9;
+  box-shadow: 0 0 8px #67e8f9;
+}
+
+.neural-status[data-energy-level="2"] {
+  color: #cffafe;
+  border-color: rgba(103, 232, 249, 0.42);
+  box-shadow: 0 0 18px rgba(103, 232, 249, 0.12);
+}
+
+.neural-status[data-energy-level="3"],
+.neural-status[data-phase="shattering"] {
+  color: #fff;
+  border-color: rgba(196, 181, 253, 0.72);
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.3), 0 0 25px rgba(167, 139, 250, 0.18);
+}
+
+.neural-status[data-energy-level="3"] .neural-status-dot,
+.neural-status[data-phase="shattering"] .neural-status-dot {
+  background: #fff;
+  box-shadow: 0 0 7px #fff, 0 0 14px #67e8f9;
+  animation: criticalDot 0.5s ease-in-out infinite;
+}
+
+.neural-status[data-phase="crystal"] {
+  color: #c4b5fd;
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 0 24px rgba(167, 139, 250, 0.18);
+}
+
+.neural-status[data-phase="crystal"] .neural-status-dot {
+  background: #c4b5fd;
+  box-shadow: 0 0 9px #a78bfa;
+}
+
+.neural-status:is([data-phase="reforming"], [data-phase="fusing"]) {
+  color: #a5f3fc;
+  border-color: rgba(103, 232, 249, 0.42);
+}
+
+.neural-status:is([data-phase="reforming"], [data-phase="fusing"]) .neural-status-dot {
+  background: #a5f3fc;
+  box-shadow: 0 0 9px #67e8f9;
+  animation: criticalDot 0.75s ease-in-out infinite;
+}
+
+.neural-status[data-phase="revealing"] {
+  color: #fff;
+  border-color: rgba(165, 243, 252, 0.55);
+  box-shadow: 0 0 18px rgba(103, 232, 249, 0.2);
+}
+
+.neural-status[data-phase="revealing"] .neural-status-dot {
+  background: #fff;
+  box-shadow: 0 0 8px #fff, 0 0 16px #67e8f9;
+}
+
+/* Seven-click rapid charge ramp. Later rules intentionally override the base three-level styling. */
+.neural-constellation:is([data-energy-level="1"], [data-energy-level="2"]) .neural-orbit {
+  animation-duration: 9s;
+  border-color: rgba(165, 243, 252, 0.48);
+  filter: drop-shadow(0 0 4px rgba(103, 232, 249, 0.28));
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-orbit {
+  animation-duration: 5.2s;
+  border-color: rgba(165, 243, 252, 0.68);
+  filter: drop-shadow(0 0 7px rgba(103, 232, 249, 0.55));
+}
+
+.neural-constellation[data-energy-level="5"] .neural-orbit {
+  animation-duration: 3s;
+  border-color: rgba(196, 181, 253, 0.82);
+  filter: drop-shadow(0 0 9px rgba(103, 232, 249, 0.78)) drop-shadow(0 0 14px rgba(167, 139, 250, 0.45));
+}
+
+.neural-constellation[data-energy-level="6"] .neural-orbit {
+  animation-duration: 1.35s;
+  border-color: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 0 9px #67e8f9) drop-shadow(0 0 20px rgba(167, 139, 250, 0.8));
+}
+
+.neural-constellation[data-phase="overdrive"] .neural-orbit {
+  animation-duration: 0.24s;
+  border-color: #fff;
+  filter: drop-shadow(0 0 11px #fff) drop-shadow(0 0 24px #67e8f9) drop-shadow(0 0 38px rgba(167, 139, 250, 0.78));
+}
+
+.neural-constellation:is(
+  [data-phase="overdrive"],
+  [data-phase="fracturing"],
+  [data-phase="shattering"]
+),
+.neural-constellation:is(
+  [data-phase="overdrive"],
+  [data-phase="fracturing"],
+  [data-phase="shattering"]
+) * {
+  cursor: none !important;
+}
+
+.neural-constellation[data-phase="overdrive"] .neural-ambient {
+  opacity: 1;
+  filter: blur(25px) brightness(1.9);
+  transform: scale(1.45);
+}
+
+.neural-constellation[data-phase="overdrive"] .neural-data-node {
+  animation-duration: 0.18s;
+  background: #fff;
+  box-shadow: 0 0 10px #fff, 0 0 24px #67e8f9, 0 0 38px rgba(167, 139, 250, 0.9);
+}
+
+.neural-constellation[data-phase="overdrive"] .neural-connections path {
+  stroke: rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 0 5px #67e8f9);
+  animation-duration: 0.3s;
+}
+
+.neural-constellation[data-phase="overdrive"] .neural-avatar-border {
+  animation-duration: 0.22s;
+  filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 36px #67e8f9) drop-shadow(0 0 52px rgba(167, 139, 250, 0.85));
+}
+
+.neural-constellation[data-phase="overdrive"] .solid-gray-atom {
+  animation: overdriveAtomPulse 0.32s ease-in-out infinite;
+}
+
+.neural-constellation[data-phase="fracturing"] .neural-avatar-shell {
+  animation: silverShellBreak 1.15s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.neural-constellation[data-phase="fracturing"] .neural-orbit {
+  animation-duration: 0.34s;
+  border-color: #fff;
+  filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 22px #67e8f9);
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-ambient {
+  filter: blur(20px) brightness(1.18);
+  transform: scale(1.2);
+}
+
+.neural-constellation:is([data-energy-level="5"], [data-energy-level="6"]) .neural-ambient {
+  filter: blur(23px) brightness(1.55);
+  transform: scale(1.34);
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-data-node {
+  animation-duration: 1.25s;
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-connections path {
+  stroke: rgba(165, 243, 252, 0.48);
+  filter: drop-shadow(0 0 2px rgba(103, 232, 249, 0.48));
+  animation-duration: 2.8s;
+}
+
+.neural-constellation:is([data-energy-level="5"], [data-energy-level="6"]) .neural-connections path {
+  stroke: rgba(224, 231, 255, 0.82);
+  filter: drop-shadow(0 0 4px #67e8f9);
+  animation-duration: 0.82s;
+}
+
+.neural-constellation:is([data-energy-level="5"], [data-energy-level="6"]) .neural-data-node {
+  background: #fff;
+  animation-duration: 0.48s;
+  box-shadow: 0 0 8px #fff, 0 0 20px #67e8f9, 0 0 32px rgba(167, 139, 250, 0.72);
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-avatar-border {
+  animation-duration: 2.1s;
+}
+
+.neural-constellation[data-energy-level="5"] .neural-avatar-border {
+  animation-duration: 1.15s;
+  filter: drop-shadow(0 0 15px #67e8f9) drop-shadow(0 0 26px rgba(167, 139, 250, 0.62));
+}
+
+.neural-constellation[data-energy-level="6"] .neural-avatar-border {
+  animation-duration: 0.48s;
+  filter: drop-shadow(0 0 18px #fff) drop-shadow(0 0 32px #67e8f9) drop-shadow(0 0 46px rgba(167, 139, 250, 0.78));
+}
+
+.neural-constellation:is([data-energy-level="3"], [data-energy-level="4"]) .neural-reticle {
+  opacity: 0.72;
+  animation-duration: 1.6s;
+  filter: drop-shadow(0 0 4px rgba(103, 232, 249, 0.55));
+}
+
+.neural-constellation:is([data-energy-level="5"], [data-energy-level="6"]) .neural-reticle {
+  opacity: 1;
+  animation-duration: 0.55s;
+  filter: drop-shadow(0 0 8px #67e8f9);
+}
+
+.neural-status:is([data-energy-level="1"], [data-energy-level="2"], [data-energy-level="3"], [data-energy-level="4"]) {
+  color: #a5f3fc;
+  border-color: rgba(103, 232, 249, 0.32);
+  box-shadow: 0 0 16px rgba(103, 232, 249, 0.1);
+}
+
+.neural-status:is([data-energy-level="1"], [data-energy-level="2"], [data-energy-level="3"], [data-energy-level="4"], [data-energy-level="5"], [data-energy-level="6"]) .neural-status-dot {
+  background: #67e8f9;
+  box-shadow: 0 0 8px #67e8f9;
+  animation: none;
+}
+
+.neural-status:is([data-energy-level="5"], [data-energy-level="6"], [data-phase="overdrive"], [data-phase="fracturing"], [data-phase="shattering"]) {
+  color: #fff;
+  border-color: rgba(196, 181, 253, 0.72);
+  box-shadow: 0 0 12px rgba(103, 232, 249, 0.3), 0 0 25px rgba(167, 139, 250, 0.2);
+}
+
+.neural-status[data-energy-level="6"] .neural-status-dot,
+.neural-status[data-phase="overdrive"] .neural-status-dot,
+.neural-status[data-phase="fracturing"] .neural-status-dot,
+.neural-status[data-phase="shattering"] .neural-status-dot {
+  background: #fff;
+  box-shadow: 0 0 7px #fff, 0 0 14px #67e8f9;
+  animation: criticalDot 0.42s ease-in-out infinite;
+}
+
+@keyframes neuralOrbitOne {
+  from { transform: rotate(12deg); }
+  to { transform: rotate(372deg); }
+}
+
+@keyframes neuralOrbitTwo {
+  from { transform: rotate(-48deg); }
+  to { transform: rotate(312deg); }
+}
+
+@keyframes neuralOrbitThree {
+  from { transform: rotate(28deg); }
+  to { transform: rotate(388deg); }
+}
+
+@keyframes neuralGridDrift {
+  from { background-position: 0 0, 0 0; transform: rotate(0deg); }
+  to { background-position: 22px 22px, 22px 22px; transform: rotate(360deg); }
+}
+
+@keyframes neuralDash {
+  to { stroke-dashoffset: -44; }
+}
+
+@keyframes neuralNodePulse {
+  0%, 100% { opacity: 0.28; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+
+@keyframes neuralBorderSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes neuralScan {
+  from { background-position: 0 -120%; }
+  to { background-position: 0 120%; }
+}
+
+@keyframes neuralReticleBreathe {
+  0%, 100% { transform: scale(0.95); opacity: 0.25; }
+  50% { transform: scale(1.03); opacity: 0.65; }
+}
+
+@keyframes crystalHalo {
+  0% { transform: scale(0.5); opacity: 0; }
+  28% { opacity: 0.85; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+@keyframes crystalFloat {
+  0%, 100% { transform: translateY(2px) rotate(-2deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+
+@keyframes crystalGlint {
+  0%, 100% { opacity: 0.3; transform: translateY(0) scaleY(0.65) rotate(-28deg); }
+  50% { opacity: 1; transform: translateY(8px) scaleY(1.15) rotate(-28deg); }
+}
+
+@keyframes criticalDot {
+  0%, 100% { opacity: 0.45; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+
+@keyframes fractureDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes overdriveAtomPulse {
+  0%, 100% { transform: scale(0.985); filter: brightness(0.96); }
+  50% { transform: scale(1.015); filter: brightness(1.28) drop-shadow(0 0 18px rgba(103,232,249,0.5)); }
+}
+
+@keyframes metalSheen {
+  0%, 18% { transform: translateX(-48%) rotate(8deg); opacity: 0.35; }
+  48%, 68% { transform: translateX(48%) rotate(8deg); opacity: 0.9; }
+  100% { transform: translateX(48%) rotate(8deg); opacity: 0.35; }
+}
+
+@keyframes silverShellBreak {
+  0%, 34% { opacity: 1; transform: scale(1); filter: brightness(1); }
+  46% { opacity: 1; transform: scale(1.035); filter: brightness(5.5); }
+  58%, 100% { opacity: 0; transform: scale(1.07); filter: brightness(2.4) blur(7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neural-grid,
+  .neural-orbit,
+  .neural-connections path,
+  .neural-data-node,
+  .neural-avatar-border,
+  .neural-scan,
+  .neural-reticle,
+  .crystal-button::before,
+  .crystal-button::after,
+  .crystal-core,
+  .crystal-glint,
+  .solid-gray-atom::before {
+    animation-play-state: paused !important;
+  }
+}
+
 /* Custom scrollbar — matte black */
 ::-webkit-scrollbar {
   width: 10px;

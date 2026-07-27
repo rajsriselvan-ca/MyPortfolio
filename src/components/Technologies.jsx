@@ -79,14 +79,14 @@ const Technologies = () => {
             initial="initial"
             animate="animate"
             title={t.label}
-            className="group relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-indigo-400/40 hover:bg-white/10 hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]"
+            className="group relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-white/5 p-3 shadow-sm backdrop-blur-sm transition-all hover:z-20 hover:-translate-y-1 hover:border-indigo-400/40 hover:bg-white/10 hover:shadow-[0_10px_30px_rgba(99,102,241,0.25)]"
           >
             {t.Icon ? (
               <t.Icon className="text-5xl" style={{ color: t.color }} />
             ) : (
               <img src={t.Img} alt={t.label} className="h-12 w-12 object-contain" />
             )}
-            <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+            <span className="pointer-events-none absolute -bottom-7 left-1/2 z-30 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100">
               {t.label}
             </span>
           </motion.div>
