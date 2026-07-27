@@ -4,6 +4,7 @@ import profilePic from "../assets/RajProfilePic.jpg";
 import {
   AnimatePresence,
   motion,
+  useAnimationFrame,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -34,6 +35,7 @@ const MAX_CHARGE = 7;
 const CHARGE_DECAY_DELAY = 850;
 const CHARGE_DECAY_STEP = 360;
 const PROFILE_REVEAL_DURATION = 5000;
+const ORBIT_SPEED_MULTIPLIERS = [1, 1.3, 1.8, 2.6, 3.8, 5.8, 9.5];
 const SILVER_SHARDS = Array.from({ length: 38 }, (_, index) => {
   const angle = (index / 38) * Math.PI * 2 + (index % 5) * 0.08;
   const distance = 112 + (index % 7) * 13;
@@ -79,6 +81,15 @@ const Hero = () => {
 
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
+  const orbitOneRotation = useMotionValue(12);
+  const orbitTwoRotation = useMotionValue(-48);
+  const orbitThreeRotation = useMotionValue(28);
+  const orbitTargetMultiplier = useRef(1);
+  const orbitVelocity = useRef({
+    one: 360 / 15,
+    two: -360 / 19,
+    three: 360 / 24,
+  });
   const tiltXRaw = useTransform(pointerY, [-1, 1], [8, -8]);
   const tiltYRaw = useTransform(pointerX, [-1, 1], [-8, 8]);
   const tiltX = useSpring(tiltXRaw, { stiffness: 180, damping: 22 });
@@ -87,6 +98,36 @@ const Hero = () => {
   const lensY = useTransform(pointerY, (value) => value * 68);
   const portraitX = useTransform(pointerX, (value) => value * -7);
   const portraitY = useTransform(pointerY, (value) => value * -7);
+
+  useEffect(() => {
+    orbitTargetMultiplier.current = phase === "overdrive"
+      ? 26
+      : phase === "fracturing"
+        ? 30
+        : phase === "shattering"
+          ? 24
+          : ORBIT_SPEED_MULTIPLIERS[chargeLevel] ?? 1;
+  }, [chargeLevel, phase]);
+
+  useAnimationFrame((_, delta) => {
+    if (reduceMotion) return;
+
+    const deltaSeconds = Math.min(delta, 50) / 1000;
+    const speedMultiplier = orbitTargetMultiplier.current;
+    const accelerationResponse = speedMultiplier >= 24 ? 3.6 : 4.8;
+    const velocityBlend = 1 - Math.exp(-deltaSeconds * accelerationResponse);
+    const targetOne = (360 / 15) * speedMultiplier;
+    const targetTwo = (-360 / 19) * speedMultiplier;
+    const targetThree = (360 / 24) * speedMultiplier;
+
+    orbitVelocity.current.one += (targetOne - orbitVelocity.current.one) * velocityBlend;
+    orbitVelocity.current.two += (targetTwo - orbitVelocity.current.two) * velocityBlend;
+    orbitVelocity.current.three += (targetThree - orbitVelocity.current.three) * velocityBlend;
+
+    orbitOneRotation.set((orbitOneRotation.get() + orbitVelocity.current.one * deltaSeconds) % 360);
+    orbitTwoRotation.set((orbitTwoRotation.get() + orbitVelocity.current.two * deltaSeconds) % 360);
+    orbitThreeRotation.set((orbitThreeRotation.get() + orbitVelocity.current.three * deltaSeconds) % 360);
+  });
 
   useEffect(() => () => {
     if (resetTimer.current) window.clearTimeout(resetTimer.current);
@@ -309,15 +350,27 @@ const Hero = () => {
             <div aria-hidden className="neural-ambient absolute inset-[13%] rounded-full" />
             <div aria-hidden className="neural-grid absolute inset-[8%] rounded-full" />
 
-            <div aria-hidden className="neural-orbit neural-orbit-one">
+            <motion.div
+              aria-hidden
+              className="neural-orbit neural-orbit-one"
+              style={{ rotate: orbitOneRotation }}
+            >
               <span className="neural-satellite" />
-            </div>
-            <div aria-hidden className="neural-orbit neural-orbit-two">
+            </motion.div>
+            <motion.div
+              aria-hidden
+              className="neural-orbit neural-orbit-two"
+              style={{ rotate: orbitTwoRotation }}
+            >
               <span className="neural-satellite" />
-            </div>
-            <div aria-hidden className="neural-orbit neural-orbit-three">
+            </motion.div>
+            <motion.div
+              aria-hidden
+              className="neural-orbit neural-orbit-three"
+              style={{ rotate: orbitThreeRotation }}
+            >
               <span className="neural-satellite" />
-            </div>
+            </motion.div>
 
             <svg
               aria-hidden
