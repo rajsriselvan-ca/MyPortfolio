@@ -20,6 +20,47 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Product showcase: technical depth with a polished hardware-console feel. */
+.project-stage-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.12), transparent 55%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), transparent 92%);
+}
+
+.project-switch {
+  scrollbar-width: none;
+}
+
+.project-switch::-webkit-scrollbar {
+  display: none;
+}
+
+.project-autoplay-progress {
+  width: 100%;
+  transform-origin: left;
+  animation: projectAutoplay 7s linear forwards;
+}
+
+.project-autoplay-progress[data-paused="true"] {
+  animation-play-state: paused;
+}
+
+@keyframes projectAutoplay {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-autoplay-progress {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
 /* Interactive neural constellation around the hero portrait */
 .neural-constellation {
   perspective: 900px;

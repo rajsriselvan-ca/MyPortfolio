@@ -21,7 +21,7 @@ const Experience = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {EXPERIENCES.map((exp, i) => (
           <motion.article
             key={exp.company}
@@ -59,7 +59,7 @@ const Experience = () => {
                 </p>
               )}
 
-              <p className="mt-4 line-clamp-6 text-sm leading-relaxed text-slate-600">
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">
                 {exp.description}
               </p>
 
