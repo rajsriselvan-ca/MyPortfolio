@@ -92,7 +92,7 @@ export const PROJECTS = [
       "Redis and RQ background processing",
       "Pluggable Groq, OpenAI, Claude or Ollama models",
     ],
-    technologies: ["Next.js", "TypeScript", "FastAPI", "Qdrant", "PostgreSQL", "RAG"],
+    technologies: ["Next.js", "TypeScript", "FastAPI", "LangChain", "Qdrant", "PostgreSQL", "RAG"],
     categories: ["ai", "web"],
     links: [
       { label: "View repository", url: "https://github.com/rajsriselvan-ca/IntellixDoc", type: "github" },
@@ -114,7 +114,7 @@ export const PROJECTS = [
     technologies: ["Next.js", "TypeScript", "Python", "FastAPI", "Supabase", "Shopify"],
     categories: ["web"],
     links: [
-      { label: "Open live project", url: "https://bookspector-engine.vercel.app", type: "external" },
+      { label: "Open live project", url: "https://bookspector.vercel.app/", type: "external" },
       { label: "View repository", url: "https://github.com/rajsriselvan-ca/Bookspector", type: "github" },
     ],
     accent: "from-emerald-600 via-teal-600 to-cyan-500",
@@ -131,7 +131,7 @@ export const PROJECTS = [
       "SSE streaming with visible reasoning traces",
       "PostgreSQL-backed tools with user isolation",
     ],
-    technologies: ["TypeScript", "React", "Hono", "PostgreSQL", "Drizzle", "AI SDK"],
+    technologies: ["TypeScript", "React", "Hono", "PostgreSQL", "Drizzle", "AI SDK", "Claude API"],
     categories: ["ai", "web"],
     links: [
       { label: "View repository", url: "https://github.com/rajsriselvan-ca/AgentDesk", type: "github" },
